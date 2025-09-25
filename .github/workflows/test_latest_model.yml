@@ -29,8 +29,7 @@ jobs:
           workflow: train_model.yml
           name: modelo-afinad-artifact
           path: ./modelo_afinad/
-          # Esta línea le da al workflow los permisos que necesita
-          token: ${{ secrets.ACTIONS_TOKEN }}
+          github_token: ${{ secrets.ACTIONS_TOKEN }}
 
       - name: Mostrar contenido descargado (para depuración)
         run: ls -R ./modelo_afinad
