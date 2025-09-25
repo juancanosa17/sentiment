@@ -26,7 +26,7 @@ def importar_csv_a_db():
         # Pandas se encarga de interpretar las comas y separar todo en columnas.
         print(f"Leyendo el archivo '{csv_file_path}'...")
         # Se intenta leer con codificación 'latin-1' que es común en datos en español
-        df = pd.read_csv(csv_file_path, encoding='latin-1')
+        df = pd.read_csv(csv_file_path, encoding='utf-8')
         print("Archivo CSV leído exitosamente.")
 
         # Opcional: Limpiar nombres de columnas (reemplazar espacios por guiones bajos)
