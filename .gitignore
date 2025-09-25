@@ -1,0 +1,9 @@
+# 📁 .gitignore (Este es el contenido correcto del archivo)
+
+# Ignorar carpetas de modelos guardados
+/resultados_finetuning/
+/modelo_afinad/
+
+# Ignorar cachés de Python
+__pycache__/
+*.pyc
