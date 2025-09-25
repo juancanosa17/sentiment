@@ -1,9 +1,9 @@
-# 📁 .github/workflows/test_latest_model.yml
+# 📁 .github/workflows/test_latest_model.yml (Versión Corregida)
 
 name: Probar Último Modelo Entrenado
 
 on:
-  workflow_dispatch: # Para ejecutarlo manualmente
+  workflow_dispatch:
 
 jobs:
   test-model:
@@ -13,6 +13,7 @@ jobs:
       - name: Checkout del código
         uses: actions/checkout@v4
 
+      # ... (los pasos de configurar python e instalar dependencias no cambian)
       - name: Configurar Python 3.10
         uses: actions/setup-python@v5
         with:
@@ -21,20 +22,18 @@ jobs:
       - name: Instalar dependencias
         run: pip install -r requirements.txt
       
-      # Descarga el artefacto del ÚLTIMO workflow de entrenamiento que se completó con éxito
+      # AÑADE LA LÍNEA 'token' AQUÍ ABAJO
       - name: Descargar último artefacto del modelo
         uses: dawidd6/action-download-artifact@v6
         with:
-          # Nombre del workflow que genera el artefacto
           workflow: train_model.yml
-          # Nombre del artefacto a descargar
           name: modelo-afinad-artifact
-          # Ruta donde se guardará (sobrescribe si existe)
           path: ./modelo_afinad/
+          # Esta línea le da al workflow los permisos que necesita
+          token: ${{ secrets.ACTIONS_TOKEN }}
 
       - name: Mostrar contenido descargado (para depuración)
         run: ls -R ./modelo_afinad
 
-      # Ejecuta el script de prueba con los nuevos sarcasmos
       - name: Ejecutar script de prueba
         run: python scripts/03_probar_modelo_afinado.py
